@@ -1,6 +1,5 @@
-package com.tpcstld.twozerogame;
+package com.sanjay.twozerogame;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -22,8 +21,8 @@ public class MainView extends View {
     private static final float MERGING_ACCELERATION = (float) -0.5;
     private static final float INITIAL_VELOCITY = (1 - MERGING_ACCELERATION) / 4;
     public final int numCellTypes = 21;
-    private final BitmapDrawable[] bitmapCell = new BitmapDrawable[numCellTypes];
     public final MainGame game;
+    private final BitmapDrawable[] bitmapCell = new BitmapDrawable[numCellTypes];
     //Internal variables
     private final Paint paint = new Paint();
     public boolean hasSaveState = false;
@@ -429,7 +428,8 @@ public class MainView extends View {
         Canvas canvas = new Canvas(background);
         drawHeader(canvas);
         drawNewGameButton(canvas, false);
-        drawUndoButton(canvas);
+        //undo button --which is used to display
+//        drawUndoButton(canvas);
         drawBackground(canvas);
         drawBackgroundGrid(canvas);
         drawInstructions(canvas);
@@ -525,15 +525,15 @@ public class MainView extends View {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(1000);
         instructionsTextSize = Math.min(
-            1000f * (widthWithPadding / (paint.measureText(getResources().getString(R.string.instructions)))),
-            textSize / 1.5f
+                1000f * (widthWithPadding / (paint.measureText(getResources().getString(R.string.instructions)))),
+                textSize / 1.5f
         );
         gameOverTextSize = Math.min(
-            Math.min(
-                1000f * ((widthWithPadding - gridWidth * 2) / (paint.measureText(getResources().getString(R.string.game_over)))),
-                textSize * 2
-            ),
-            1000f * ((widthWithPadding - gridWidth * 2) / (paint.measureText(getResources().getString(R.string.you_win))))
+                Math.min(
+                        1000f * ((widthWithPadding - gridWidth * 2) / (paint.measureText(getResources().getString(R.string.game_over)))),
+                        textSize * 2
+                ),
+                1000f * ((widthWithPadding - gridWidth * 2) / (paint.measureText(getResources().getString(R.string.you_win))))
         );
 
         paint.setTextSize(cellSize);

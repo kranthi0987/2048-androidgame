@@ -1,4 +1,4 @@
-package com.tpcstld.twozerogame;
+package com.sanjay.twozerogame;
 
 public class Tile extends Cell {
     private final int value;

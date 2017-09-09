@@ -1,4 +1,4 @@
-package com.tpcstld.twozerogame;
+package com.sanjay.twozerogame;
 
 class AnimationCell extends Cell {
     public final int[] extras;

@@ -1,4 +1,4 @@
-package com.tpcstld.twozerogame;
+package com.sanjay.twozerogame;
 
 import java.util.ArrayList;
 
