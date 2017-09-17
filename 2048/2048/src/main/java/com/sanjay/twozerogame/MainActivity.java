@@ -2,6 +2,7 @@ package com.sanjay.twozerogame;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.KeyEvent;
@@ -9,9 +10,11 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class MainActivity extends ActionBarActivity {
@@ -24,8 +27,10 @@ public class MainActivity extends ActionBarActivity {
     public static final String UNDO_GRID = "undo";
     public static final String GAME_STATE = "game state";
     public static final String UNDO_GAME_STATE = "undo game state";
+    //ads
     public AdView adView;
     public FirebaseAnalytics mFirebaseAnalytics;
+    public InterstitialAd interAd = new InterstitialAd(this);
     MainView view;
 
     @Override
@@ -68,6 +73,31 @@ public class MainActivity extends ActionBarActivity {
                 .build();
         adView.loadAd(request);
 
+        //interstial ad
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                interAd.setAdUnitId("ca-app-pub-2324532608407659/6962605939");
+                AdRequest adRequest = new AdRequest.Builder()
+                        .build();
+                interAd.loadAd(adRequest);
+                interAd.setAdListener(new AdListener() {
+                    @Override
+
+                    public void onAdLoaded() {
+                        displayinterstitial();
+                    }
+                });
+
+            }
+        }, 600000);
+
+    }
+
+    public void displayinterstitial() {
+        if (interAd.isLoaded()) {
+            interAd.show();
+        }
     }
 
     @Override
